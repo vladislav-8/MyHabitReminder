@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MyHabitReminder</string>
+    <string name="settings">Настройки</string>
+    <string name="habits">Привычки</string>
+    <string name="notifications">Напоминания</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
