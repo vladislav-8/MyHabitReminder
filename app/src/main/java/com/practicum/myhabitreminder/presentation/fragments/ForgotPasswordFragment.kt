@@ -1,4 +1,4 @@
-package com.practicum.myhabitreminder.presentation
+package com.practicum.myhabitreminder.presentation.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
