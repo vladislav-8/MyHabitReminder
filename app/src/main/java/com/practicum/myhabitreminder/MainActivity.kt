@@ -2,9 +2,11 @@ package com.practicum.myhabitreminder
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.practicum.myhabitreminder.databinding.ActivityMainBinding
-import com.practicum.myhabitreminder.presentation.LoginFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,10 +17,20 @@ class MainActivity : AppCompatActivity() {
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container_view, LoginFragment())
-                .commit()
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        mainBinding.bottomNavigationView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.loginFragment -> {
+                    mainBinding.bottomNavigationView.visibility = GONE
+                }
+                else -> {
+                    mainBinding.bottomNavigationView.visibility = VISIBLE
+                }
+            }
         }
     }
 }

@@ -1,0 +1,45 @@
+package com.practicum.myhabitreminder.db.entity
+
+import android.os.Parcel
+import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.practicum.myhabitreminder.db.entity.HabitEntity.CREATOR.TABLE_NAME
+
+@Entity(tableName = TABLE_NAME)
+data class HabitEntity(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
+    val title: String?,
+    val description: String?,
+): Parcelable
+
+{
+    constructor(parcel: Parcel) : this(
+        parcel.readInt(),
+        parcel.readString(),
+        parcel.readString()
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
+        parcel.writeString(title)
+        parcel.writeString(description)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<HabitEntity> {
+        override fun createFromParcel(parcel: Parcel): HabitEntity {
+            return HabitEntity(parcel)
+        }
+
+        override fun newArray(size: Int): Array<HabitEntity?> {
+            return arrayOfNulls(size)
+        }
+
+        const val TABLE_NAME = "habit_table"
+    }
+}

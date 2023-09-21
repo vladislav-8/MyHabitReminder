@@ -20,10 +20,23 @@
         android:id="@+id/appFragment"
         android:name="com.practicum.myhabitreminder.presentation.AppFragment"
         android:label="fragment_app"
-        tools:layout="@layout/fragment_app" />
+        tools:layout="@layout/fragment_app" >
+        <action
+            android:id="@+id/action_appFragment_to_creatHabitFragment"
+            app:destination="@id/creatHabitFragment" />
+    </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="com.practicum.myhabitreminder.presentation.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
         tools:layout="@layout/fragment_forgot_password" />
+    <fragment
+        android:id="@+id/creatHabitFragment"
+        android:name="com.practicum.myhabitreminder.presentation.CreateHabitFragment"
+        android:label="fragment_creat_habit"
+        tools:layout="@layout/fragment_create_habit" >
+        <action
+            android:id="@+id/action_creatHabitFragment_to_appFragment"
+            app:destination="@id/appFragment" />
+    </fragment>
 </navigation>
