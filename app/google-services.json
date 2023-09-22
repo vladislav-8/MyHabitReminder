@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "95146917818",
+    "project_id": "myhabitreminder",
+    "storage_bucket": "myhabitreminder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95146917818:android:5098ba3218237b4be7e783",
+        "android_client_info": {
+          "package_name": "com.practicum.myhabitreminder"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBkTLRF_2Xk60QvdAJhZCxNp8QPHVB2ck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
