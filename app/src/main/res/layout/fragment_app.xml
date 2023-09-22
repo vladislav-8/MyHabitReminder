@@ -19,7 +19,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             tools:itemCount="20"
-            tools:listitem="@layout/recycler_habit_item_layout" />
+            tools:listitem="@layout/habit_item" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
