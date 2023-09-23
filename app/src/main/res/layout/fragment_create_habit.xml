@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,97 +7,111 @@
     android:background="@drawable/background"
     tools:context=".presentation.fragments.CreateHabitFragment">
 
-    <ScrollView
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_habitTitle_1"
+        style="@style/EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_marginHorizontal="@dimen/margin_horizontal_16dp"
+        android:layout_marginTop="120dp"
+        android:hint="@string/habit_title"
+        android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/ll_textviews"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_habitTitle"
+            style="@style/EditTextStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/et_habitTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:backgroundTint="@color/white"
-                android:hint="Habit title"
-                android:inputType="text"
-                android:textColor="@android:color/white"
-                android:textColorHint="@color/white"
-                android:textSize="20sp" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_habitDescription_1"
+        style="@style/EditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_horizontal_16dp"
+        android:layout_marginTop="@dimen/marginTop_16"
+        android:hint="@string/give_it_a_short_description"
+        android:theme="@style/ThemeOverlay.AppTheme.TextInputEditText.Outlined"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_habitTitle_1">
 
-            <EditText
-                android:id="@+id/et_habitDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:backgroundTint="@color/white"
-                android:hint="Give it a short description"
-                android:inputType="textShortMessage"
-                android:textColor="@android:color/white"
-                android:textColorHint="@color/white"
-                android:textSize="20sp" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_habitDescription"
+            style="@style/EditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-            <Button
-                android:id="@+id/btn_pickDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/round_button"
-                android:clickable="true"
-                android:focusable="true"
-                android:text="Pick a date"
-                android:textColor="@color/orange"
-                app:backgroundTint="@color/white" />
+    <Button
+        android:id="@+id/btn_pickDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_horizontal_16dp"
+        android:layout_marginTop="@dimen/marginTop_16"
+        android:background="@drawable/round_button"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/pick_a_date"
+        android:textColor="@color/orange"
+        app:backgroundTint="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/et_habitDescription_1"
+        app:layout_constraintTop_toBottomOf="@+id/et_habitDescription_1" />
 
-            <TextView
-                android:id="@+id/tv_dateSelected"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Date: (not selected)"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
+    <TextView
+        android:id="@+id/tv_dateSelected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_horizontal_16dp"
+        android:layout_marginTop="@dimen/marginTop_16"
+        android:text="@string/date_not_selected"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize_20"
+        app:layout_constraintStart_toStartOf="@+id/btn_pickDate"
+        app:layout_constraintTop_toBottomOf="@+id/btn_pickDate" />
 
-            <Button
-                android:id="@+id/btn_pickTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/round_button"
-                android:clickable="true"
-                android:focusable="true"
-                android:text="Pick a time"
-                android:textColor="@color/orange"
-                app:backgroundTint="@color/white" />
+    <Button
+        android:id="@+id/btn_pickTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_horizontal_16dp"
+        android:layout_marginTop="@dimen/marginTop_16"
+        android:background="@drawable/round_button"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/pick_a_time"
+        android:textColor="@color/orange"
+        app:backgroundTint="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/tv_dateSelected"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dateSelected" />
 
-            <TextView
-                android:id="@+id/tv_timeSelected"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Time: (not selected)"
-                android:textColor="@color/white"
-                android:textSize="20sp" />
+    <TextView
+        android:id="@+id/tv_timeSelected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_horizontal_16dp"
+        android:layout_marginTop="@dimen/marginTop_16"
+        android:text="@string/time_not_selected"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textSize_20"
+        app:layout_constraintStart_toStartOf="@+id/btn_pickTime"
+        app:layout_constraintTop_toBottomOf="@+id/btn_pickTime" />
 
-            <Button
-                android:id="@+id/btn_confirm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/round_button"
-                android:clickable="true"
-                android:focusable="true"
-                android:text="Confirm"
-                android:textColor="@color/orange"
-                app:backgroundTint="@color/white" />
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_horizontal_16dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/round_button"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/confirm"
+        android:textColor="@color/orange"
+        app:backgroundTint="@color/white"
+        app:layout_constraintStart_toStartOf="@+id/tv_timeSelected"
+        app:layout_constraintTop_toBottomOf="@+id/tv_timeSelected" />
 
-        </LinearLayout>
-    </ScrollView>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
