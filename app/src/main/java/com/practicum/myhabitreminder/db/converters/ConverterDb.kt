@@ -10,6 +10,7 @@ class ConverterDb {
             id = from.id,
             title = from.title!!,
             description = from.description!!,
+            timeStamp = from.timeStamp!!
         )
     }
 
@@ -18,6 +19,7 @@ class ConverterDb {
             id = from.id,
             title = from.title,
             description = from.description,
+            timeStamp = from.timeStamp
         )
     }
 }

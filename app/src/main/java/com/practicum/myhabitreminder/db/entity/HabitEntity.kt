@@ -12,11 +12,13 @@ data class HabitEntity(
     val id: Int,
     val title: String?,
     val description: String?,
+    val timeStamp: String?,
 ): Parcelable
 
 {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString()
     )
