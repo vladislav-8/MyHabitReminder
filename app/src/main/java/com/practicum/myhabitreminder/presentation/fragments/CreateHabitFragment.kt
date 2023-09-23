@@ -14,12 +14,12 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.practicum.myhabitreminder.R
 import com.practicum.myhabitreminder.common.utils.Calculations
+import com.practicum.myhabitreminder.data.network.ApiCall
 import com.practicum.myhabitreminder.databinding.FragmentCreateHabitBinding
 import com.practicum.myhabitreminder.domain.models.Habit
 import com.practicum.myhabitreminder.presentation.viewmodels.HabitViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Calendar
-import kotlin.math.min
 
 class CreateHabitFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
     DatePickerDialog.OnDateSetListener {
@@ -35,6 +35,8 @@ class CreateHabitFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
     private var minute = 0
     private var cleanDate = ""
     private var cleanTime = ""
+
+    private var mSelectedCategory: String = "animal"
 
     private var _binding: FragmentCreateHabitBinding? = null
     private val binding get() = _binding!!
@@ -52,6 +54,10 @@ class CreateHabitFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
         super.onViewCreated(view, savedInstanceState)
 
         initListeners()
+
+        /*ApiCall().getRandomJoke(mSelectedCategory) { joke ->
+            binding.btnPickDate.text = "${joke?.setup}\n${joke?.punchline}"
+        }*/ // tut shutki pribautki
     }
 
     override fun onDestroyView() {
