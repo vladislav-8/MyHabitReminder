@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -61,6 +62,7 @@ class AppFragment : Fragment() {
             viewModel.deleteAllHabits()
             habitsAdapter.clearHabits()
             binding.tvEmptyView.isVisible = true
+            binding.deleteHabitsButton.isVisible = false
         }
     }
 
@@ -70,39 +72,53 @@ class AppFragment : Fragment() {
                 habitsAdapter.clearHabits()
                 habitsAdapter.habits = state.habits as MutableList<Habit>
                 binding.rvHabits.isVisible = true
-                binding.tvEmptyView.isVisible = false
+                binding.tvEmptyView.isVisible = true
+                binding.deleteHabitsButton.isVisible = true
             }
 
             is HabitState.Empty -> {
                 binding.rvHabits.isVisible = false
                 binding.tvEmptyView.isVisible = true
+                binding.deleteHabitsButton.isVisible = false
             }
         }
     }
 
     private fun showLongClickOnHabit(habit: Habit) {
+        Toast.makeText(context, "najal epta", Toast.LENGTH_SHORT).show()
         showConfirmDialog(habit)
     }
 
     private fun showConfirmDialog(habit: Habit) {
         context?.let { context ->
-            MaterialAlertDialogBuilder(requireContext(),  R.style.MyDialogTheme)
+            MaterialAlertDialogBuilder(requireContext(), R.style.MyDialogTheme)
                 .setMessage(requireContext().getString(R.string.are_you_sure_to_delete_track))
                 .setNegativeButton(R.string.no) { dialog, which -> }
                 .setPositiveButton(R.string.yes) { dialog, which ->
                     habit.let { habit ->
                         viewModel.deleteHabit(habit)
+                        val indexToRemove =
+                            habitsAdapter.habits.indexOfFirst { it.id == habit.id }
+                        if (indexToRemove != DELETE_HABIT) {
+                            indexToRemove.let { habitsAdapter.habits.removeAt(it) }
+                            indexToRemove.let { habitsAdapter.notifyItemRemoved(it) }
+                        }
+                        binding.deleteHabitsButton.isVisible = false
                     }
                 }.show()
         }
     }
 
     private fun showHabits(habit: Habit) {
-        //zdes ya budu pokazivat habits
+        //
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val DELETE_HABIT = -1
     }
 }
