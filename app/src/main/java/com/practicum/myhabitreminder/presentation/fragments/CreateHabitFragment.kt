@@ -3,6 +3,8 @@ package com.practicum.myhabitreminder.presentation.fragments
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +13,10 @@ import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.view.isNotEmpty
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.practicum.myhabitreminder.R
 import com.practicum.myhabitreminder.common.utils.Calculations
@@ -79,10 +85,17 @@ class CreateHabitFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
             description = binding.etHabitDescription.text.toString()
             timeStamp = "$cleanDate $cleanTime"
 
-            val habit = Habit(0, title, description, timeStamp)
-            viewModel.addHabit(habit)
-            Toast.makeText(context, R.string.habit_created, Toast.LENGTH_SHORT).show()
-            findNavController().popBackStack()
+            if (!(title.isEmpty() || description.isEmpty() || cleanDate.isBlank() || cleanTime.isBlank())) {
+                Log.d("TAG", timeStamp)
+
+                val habit = Habit(0, title, description, timeStamp)
+                viewModel.addHabit(habit)
+                Toast.makeText(context, R.string.habit_created, Toast.LENGTH_SHORT).show()
+                findNavController().popBackStack()
+
+            } else {
+                Toast.makeText(context, "Please fill all the fields", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -110,5 +123,4 @@ class CreateHabitFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
         month = cal.get(Calendar.MONTH)
         year = cal.get(Calendar.YEAR)
     }
-
 }

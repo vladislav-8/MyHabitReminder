@@ -1,8 +1,8 @@
 package com.practicum.myhabitreminder
 
 import android.app.Application
-import com.practicum.myhabitreminder.di.dbModule
-import com.practicum.myhabitreminder.di.habitModule
+import com.practicum.myhabitreminder.common.di.dbModule
+import com.practicum.myhabitreminder.common.di.habitModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin

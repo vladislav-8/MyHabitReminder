@@ -1,9 +1,9 @@
-package com.practicum.myhabitreminder.db.database
+package com.practicum.myhabitreminder.common.db.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.practicum.myhabitreminder.db.dao.HabitDao
-import com.practicum.myhabitreminder.db.entity.HabitEntity
+import com.practicum.myhabitreminder.common.db.dao.HabitDao
+import com.practicum.myhabitreminder.common.db.entity.HabitEntity
 
 @Database(
     entities = [HabitEntity::class],

@@ -1,6 +1,6 @@
 package com.practicum.myhabitreminder.data.network
 
-import com.practicum.myhabitreminder.data.network.model.Joke
+import com.practicum.myhabitreminder.data.network.models.Joke
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback

@@ -1,4 +1,4 @@
-package com.practicum.myhabitreminder.db.dao
+package com.practicum.myhabitreminder.common.db.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -6,7 +6,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.practicum.myhabitreminder.db.entity.HabitEntity
+import com.practicum.myhabitreminder.common.db.entity.HabitEntity
+import com.practicum.myhabitreminder.domain.models.Habit
 
 @Dao
 interface HabitDao {

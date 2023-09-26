@@ -1,4 +1,4 @@
-package com.practicum.myhabitreminder.di
+package com.practicum.myhabitreminder.common.di
 
 
 import com.practicum.myhabitreminder.data.impl.HabitRepositoryImpl

@@ -1,4 +1,4 @@
-package com.practicum.myhabitreminder.data.network.model
+package com.practicum.myhabitreminder.data.network.models
 
 data class Joke(
     val setup: String,

@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/background"
     tools:context=".presentation.fragments.AppFragment">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeToRefresh"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_habits"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_habits"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            tools:itemCount="20"
-            tools:listitem="@layout/habit_item" />
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="20"
+        tools:listitem="@layout/habit_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add"
@@ -36,17 +30,29 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/orange"/>
+        app:backgroundTint="@color/orange" />
+
+    <Button
+        android:id="@+id/delete_habits_button"
+        style="@style/refresh_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/delete_habits"
+        app:cornerRadius="54dp" />
 
     <TextView
         android:id="@+id/tv_emptyView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Add a habit! "
+        android:text="@string/add_a_habit"
         android:textColor="@android:color/white"
-        android:textSize="20sp"
+        android:textSize="@dimen/textSize_20"
         android:textStyle="italic"
         android:visibility="gone" />
-
 </RelativeLayout>
+

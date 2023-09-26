@@ -1,6 +1,6 @@
-package com.practicum.myhabitreminder.db.converters
+package com.practicum.myhabitreminder.common.db.converters
 
-import com.practicum.myhabitreminder.db.entity.HabitEntity
+import com.practicum.myhabitreminder.common.db.entity.HabitEntity
 import com.practicum.myhabitreminder.domain.models.Habit
 
 class ConverterDb {
@@ -19,7 +19,7 @@ class ConverterDb {
             id = from.id,
             title = from.title,
             description = from.description,
-            timeStamp = from.timeStamp
-        )
+            timeStamp = from.timeStamp,
+            )
     }
 }

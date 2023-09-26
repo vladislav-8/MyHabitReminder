@@ -1,8 +1,8 @@
 package com.practicum.myhabitreminder.data.impl
 
-import com.practicum.myhabitreminder.db.converters.ConverterDb
-import com.practicum.myhabitreminder.db.database.HabitDatabase
-import com.practicum.myhabitreminder.db.entity.HabitEntity
+import com.practicum.myhabitreminder.common.db.converters.ConverterDb
+import com.practicum.myhabitreminder.common.db.database.HabitDatabase
+import com.practicum.myhabitreminder.common.db.entity.HabitEntity
 import com.practicum.myhabitreminder.domain.models.Habit
 import com.practicum.myhabitreminder.domain.usecase.HabitRepository
 import kotlinx.coroutines.flow.Flow
@@ -21,7 +21,7 @@ class HabitRepositoryImpl(
         database.habitDao().deleteHabit(converter.mapFromHabitToHabitEntity(habit))
     }
 
-    override suspend fun deleteAllHabits(): Flow<List<Habit>> = flow {
+    override suspend fun deleteAllHabits() {
         database.habitDao().deleteAllHabits()
     }
 

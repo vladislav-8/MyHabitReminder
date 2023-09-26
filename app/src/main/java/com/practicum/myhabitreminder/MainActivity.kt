@@ -6,6 +6,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.practicum.myhabitreminder.R
 import com.practicum.myhabitreminder.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

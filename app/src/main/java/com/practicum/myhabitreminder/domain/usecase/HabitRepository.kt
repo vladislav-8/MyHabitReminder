@@ -9,7 +9,7 @@ interface HabitRepository {
 
     suspend fun deleteHabit(habit: Habit)
 
-    suspend fun deleteAllHabits(): Flow<List<Habit>>
+    suspend fun deleteAllHabits()
 
     suspend fun getAllHabits(): Flow<List<Habit>>
 

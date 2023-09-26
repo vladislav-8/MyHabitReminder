@@ -15,4 +15,10 @@
     <string name="pick_a_time">Pick a time</string>
     <string name="time_not_selected">Time: (not selected)</string>
     <string name="confirm">Confirm</string>
+    <string name="add_a_habit">Add a habit!</string>
+    <string name="delete_everything">Delete everything</string>
+    <string name="delete_habits">Delete Habits</string>
+    <string name="are_you_sure_to_delete_track">Хотите удалить трек?</string>
+    <string name="no">Нет</string>
+    <string name="yes">Да</string>
 </resources>

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.practicum.myhabitreminder.domain.models.Habit
 import com.practicum.myhabitreminder.domain.usecase.HabitRepository
+import com.practicum.myhabitreminder.presentation.models.HabitState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -13,8 +14,26 @@ class HabitViewModel(
     private val habitRepository: HabitRepository
 ) : ViewModel() {
 
-    private val _habit = MutableLiveData<Habit>()
-    val habit: LiveData<Habit> = _habit
+    private val stateLiveData = MutableLiveData<HabitState>()
+    fun observeState(): LiveData<HabitState> = stateLiveData
+
+    fun getAllHabits() {
+        viewModelScope.launch {
+            habitRepository
+                .getAllHabits()
+                .collect { habits ->
+                    if (habits.isEmpty()) {
+                        renderState(HabitState.Empty)
+                    } else {
+                        renderState(HabitState.Content(habits))
+                    }
+                }
+        }
+    }
+
+    private fun renderState(state: HabitState) {
+        stateLiveData.postValue(state)
+    }
 
 
     fun addHabit(habit: Habit) {

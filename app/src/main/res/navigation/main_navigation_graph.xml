@@ -38,5 +38,8 @@
         <action
             android:id="@+id/action_creatHabitFragment_to_appFragment"
             app:destination="@id/appFragment" />
+        <argument
+            android:name="selectedHabit"
+            app:argType="com.practicum.myhabitreminder.common.db.entity.HabitEntity" />
     </fragment>
 </navigation>

@@ -13,7 +13,7 @@ class HabitAdapter(
 ) :
     RecyclerView.Adapter<HabitViewHolder>() {
 
-    var habits = mutableListOf<Habit>()
+    var habits = emptyList<Habit>()
         set(newTracks) {
             val diffCallback = DiffUtilCallback(field, newTracks)
             val diffResult = DiffUtil.calculateDiff(diffCallback)
@@ -31,20 +31,20 @@ class HabitAdapter(
     override fun onBindViewHolder(holder: HabitViewHolder, position: Int) {
         holder.bind(habits[position])
         holder.itemView.setOnClickListener {
-            clickListener.onTrackClick(habits[holder.adapterPosition])
+            clickListener.onHabitClick(habits[holder.adapterPosition])
         }
         holder.itemView.setOnLongClickListener {
-            longClick.onTrackLongClick(habits[holder.adapterPosition])
+            longClick.onHabitLongClick(habits[holder.adapterPosition])
             true
         }
     }
 
     fun interface HabitClickListener {
-        fun onTrackClick(habit: Habit)
+        fun onHabitClick(habit: Habit)
     }
 
     fun interface LongHabitClickListener {
-        fun onTrackLongClick(habit: Habit)
+        fun onHabitLongClick(habit: Habit)
     }
 
     fun clearHabits() {

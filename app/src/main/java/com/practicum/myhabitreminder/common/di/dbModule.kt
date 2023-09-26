@@ -1,8 +1,8 @@
-package com.practicum.myhabitreminder.di
+package com.practicum.myhabitreminder.common.di
 
 import androidx.room.Room
-import com.practicum.myhabitreminder.db.converters.ConverterDb
-import com.practicum.myhabitreminder.db.database.HabitDatabase
+import com.practicum.myhabitreminder.common.db.converters.ConverterDb
+import com.practicum.myhabitreminder.common.db.database.HabitDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
