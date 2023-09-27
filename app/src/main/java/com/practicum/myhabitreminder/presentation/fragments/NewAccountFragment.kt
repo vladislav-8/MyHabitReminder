@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.practicum.myhabitreminder.R
 import com.practicum.myhabitreminder.databinding.FragmentAppBinding
 import com.practicum.myhabitreminder.databinding.FragmentNewAccountBinding
@@ -23,9 +24,16 @@ class NewAccountFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.toolbar.setOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

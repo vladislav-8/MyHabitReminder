@@ -33,4 +33,7 @@
     <string name="last_name">Last name</string>
     <string name="email">Email</string>
     <string name="please_tell_us_about_yourself">Please tell us about yourself</string>
+    <string name="text_fragment_dialog_resetting_password">Resetting password</string>
+    <string name="text_fragment_dialog_message">Please enter your email, we will send you a new password</string>
+    <string name="text_fragment_dialog_text_send">Send</string>
 </resources>

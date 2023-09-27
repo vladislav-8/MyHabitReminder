@@ -35,11 +35,18 @@ class LoginFragment : Fragment() {
         binding.createAccountTv.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_newAccountFragment)
         }
+        binding.forgotpass.setOnClickListener {
+            ResetPasswordFragment().show(childFragmentManager, TAG_RESETPASS)
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object{
+        const val TAG_RESETPASS ="ResetpassDialog"
     }
 
 }
