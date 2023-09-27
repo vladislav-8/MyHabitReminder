@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_newAccountFragment"
+            app:destination="@id/newAccountFragment" />
     </fragment>
     <fragment
         android:id="@+id/appFragment"
@@ -38,8 +41,10 @@
         <action
             android:id="@+id/action_creatHabitFragment_to_appFragment"
             app:destination="@id/appFragment" />
-        <argument
-            android:name="selectedHabit"
-            app:argType="com.practicum.myhabitreminder.common.db.entity.HabitEntity" />
     </fragment>
+    <fragment
+        android:id="@+id/newAccountFragment"
+        android:name="com.practicum.myhabitreminder.presentation.fragments.NewAccountFragment"
+        android:label="NewAccountFragment"
+        tools:layout="@layout/fragment_new_account"/>
 </navigation>

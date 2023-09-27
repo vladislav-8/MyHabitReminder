@@ -38,6 +38,7 @@ class AppFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.deleteHabitsButton.isVisible = false
         initListeners()
         initAdapters()
         initObservers()
@@ -85,14 +86,13 @@ class AppFragment : Fragment() {
     }
 
     private fun showLongClickOnHabit(habit: Habit) {
-        Toast.makeText(context, "najal epta", Toast.LENGTH_SHORT).show()
         showConfirmDialog(habit)
     }
 
     private fun showConfirmDialog(habit: Habit) {
         context?.let { context ->
             MaterialAlertDialogBuilder(requireContext(), R.style.MyDialogTheme)
-                .setMessage(requireContext().getString(R.string.are_you_sure_to_delete_track))
+                .setMessage(requireContext().getString(R.string.are_you_sure_to_delete_habit))
                 .setNegativeButton(R.string.no) { dialog, which -> }
                 .setPositiveButton(R.string.yes) { dialog, which ->
                     habit.let { habit ->

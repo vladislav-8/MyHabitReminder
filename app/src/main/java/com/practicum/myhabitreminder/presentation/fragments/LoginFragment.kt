@@ -32,6 +32,9 @@ class LoginFragment : Fragment() {
         binding.loginbtn.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_appFragment)
         }
+        binding.createAccountTv.setOnClickListener {
+            findNavController().navigate(R.id.action_loginFragment_to_newAccountFragment)
+        }
     }
 
     override fun onDestroyView() {

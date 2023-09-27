@@ -30,7 +30,8 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_add"
-        app:backgroundTint="@color/orange" />
+        app:backgroundTint="@color/orange"
+        app:tint="@null" />
 
     <Button
         android:id="@+id/delete_habits_button"

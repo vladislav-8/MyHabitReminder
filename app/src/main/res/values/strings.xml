@@ -18,7 +18,19 @@
     <string name="add_a_habit">Add a habit!</string>
     <string name="delete_everything">Delete everything</string>
     <string name="delete_habits">Delete Habits</string>
-    <string name="are_you_sure_to_delete_track">Хотите удалить трек?</string>
+    <string name="are_you_sure_to_delete_habit">Хотите удалить напоминалку?</string>
     <string name="no">Нет</string>
     <string name="yes">Да</string>
+    <string name="create_account"><u>Create Account</u></string>
+    <string name="new_user">New user?</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="login">LOGIN</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="email">Email</string>
+    <string name="please_tell_us_about_yourself">Please tell us about yourself</string>
 </resources>
