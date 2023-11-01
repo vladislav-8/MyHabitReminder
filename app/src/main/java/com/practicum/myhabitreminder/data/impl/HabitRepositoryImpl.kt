@@ -4,7 +4,7 @@ import com.practicum.myhabitreminder.common.db.converters.ConverterDb
 import com.practicum.myhabitreminder.common.db.database.HabitDatabase
 import com.practicum.myhabitreminder.common.db.entity.HabitEntity
 import com.practicum.myhabitreminder.domain.models.Habit
-import com.practicum.myhabitreminder.domain.usecase.HabitRepository
+import com.practicum.myhabitreminder.domain.repository.HabitRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

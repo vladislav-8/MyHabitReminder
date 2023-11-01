@@ -3,8 +3,6 @@ package com.practicum.myhabitreminder.presentation.fragments
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,14 +11,9 @@ import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.view.isNotEmpty
-import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
 import androidx.navigation.fragment.findNavController
 import com.practicum.myhabitreminder.R
 import com.practicum.myhabitreminder.common.utils.Calculations
-import com.practicum.myhabitreminder.data.network.ApiCall
 import com.practicum.myhabitreminder.databinding.FragmentCreateHabitBinding
 import com.practicum.myhabitreminder.domain.models.Habit
 import com.practicum.myhabitreminder.presentation.viewmodels.HabitViewModel

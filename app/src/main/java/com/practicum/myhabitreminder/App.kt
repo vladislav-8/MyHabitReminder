@@ -1,6 +1,7 @@
 package com.practicum.myhabitreminder
 
 import android.app.Application
+import com.practicum.myhabitreminder.common.di.authModule
 import com.practicum.myhabitreminder.common.di.dbModule
 import com.practicum.myhabitreminder.common.di.habitModule
 import org.koin.android.ext.koin.androidContext
@@ -19,7 +20,8 @@ class App : Application() {
             modules(
                 listOf(
                     dbModule,
-                    habitModule
+                    habitModule,
+                    authModule
                 )
             )
         }

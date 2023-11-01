@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.practicum.myhabitreminder.domain.models.Habit
-import com.practicum.myhabitreminder.domain.usecase.HabitRepository
+import com.practicum.myhabitreminder.domain.repository.HabitRepository
 import com.practicum.myhabitreminder.presentation.models.HabitState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

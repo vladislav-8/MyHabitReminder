@@ -73,7 +73,7 @@ class AppFragment : Fragment() {
                 habitsAdapter.clearHabits()
                 habitsAdapter.habits = state.habits as MutableList<Habit>
                 binding.rvHabits.isVisible = true
-                binding.tvEmptyView.isVisible = true
+                binding.tvEmptyView.isVisible = false
                 binding.deleteHabitsButton.isVisible = true
             }
 

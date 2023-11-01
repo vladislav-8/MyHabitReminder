@@ -1,4 +1,4 @@
-package com.practicum.myhabitreminder.domain.usecase
+package com.practicum.myhabitreminder.domain.repository
 
 import com.practicum.myhabitreminder.domain.models.Habit
 import kotlinx.coroutines.flow.Flow

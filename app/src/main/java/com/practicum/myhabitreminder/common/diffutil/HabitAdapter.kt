@@ -2,7 +2,6 @@ package com.practicum.myhabitreminder.common.diffutil
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.practicum.myhabitreminder.R
@@ -15,10 +14,10 @@ class HabitAdapter(
     RecyclerView.Adapter<HabitViewHolder>() {
 
     var habits = mutableListOf<Habit>()
-        set(newTracks) {
-            val diffCallback = DiffUtilCallback(field, newTracks)
+        set(newHabits) {
+            val diffCallback = DiffUtilCallback(field, newHabits)
             val diffResult = DiffUtil.calculateDiff(diffCallback)
-            field = newTracks
+            field = newHabits
             diffResult.dispatchUpdatesTo(this)
         }
 
