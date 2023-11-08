@@ -3,8 +3,8 @@ package com.practicum.myhabitreminder.common.di
 import com.google.firebase.auth.FirebaseAuth
 import com.practicum.myhabitreminder.data.impl.AuthRepositoryImpl
 import com.practicum.myhabitreminder.domain.repository.AuthRepository
-import com.practicum.myhabitreminder.domain.usecase.SignInUseCase
-import com.practicum.myhabitreminder.domain.usecase.SignUpUseCase
+import com.practicum.myhabitreminder.domain.usecase.firebase.SignInUseCase
+import com.practicum.myhabitreminder.domain.usecase.firebase.SignUpUseCase
 import com.practicum.myhabitreminder.presentation.viewmodels.AuthorizationViewModel
 import com.practicum.myhabitreminder.presentation.viewmodels.RegistrationViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel

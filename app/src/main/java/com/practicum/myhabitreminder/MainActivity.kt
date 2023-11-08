@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.practicum.myhabitreminder.R
@@ -25,12 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.loginFragment -> {
-                    mainBinding.bottomNavigationView.visibility = GONE
-                }
-                else -> {
-                    mainBinding.bottomNavigationView.visibility = VISIBLE
-                }
+                R.id.loginFragment -> mainBinding.bottomNavigationView.isVisible = false
+                else -> mainBinding.bottomNavigationView.isVisible = true
             }
         }
     }

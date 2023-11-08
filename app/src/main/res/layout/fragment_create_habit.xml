@@ -73,33 +73,6 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_pickDate" />
 
     <Button
-        android:id="@+id/btn_pickTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_horizontal_16dp"
-        android:layout_marginTop="@dimen/marginTop_16"
-        android:background="@drawable/round_button"
-        android:clickable="true"
-        android:focusable="true"
-        android:text="@string/pick_a_time"
-        android:textColor="@color/orange"
-        app:backgroundTint="@color/white"
-        app:layout_constraintStart_toStartOf="@+id/tv_dateSelected"
-        app:layout_constraintTop_toBottomOf="@+id/tv_dateSelected" />
-
-    <TextView
-        android:id="@+id/tv_timeSelected"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_horizontal_16dp"
-        android:layout_marginTop="@dimen/marginTop_16"
-        android:text="@string/time_not_selected"
-        android:textColor="@color/white"
-        android:textSize="@dimen/textSize_20"
-        app:layout_constraintStart_toStartOf="@+id/btn_pickTime"
-        app:layout_constraintTop_toBottomOf="@+id/btn_pickTime" />
-
-    <Button
         android:id="@+id/btn_confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -111,7 +84,7 @@
         android:text="@string/confirm"
         android:textColor="@color/orange"
         app:backgroundTint="@color/white"
-        app:layout_constraintStart_toStartOf="@+id/tv_timeSelected"
-        app:layout_constraintTop_toBottomOf="@+id/tv_timeSelected" />
+        app:layout_constraintStart_toStartOf="@+id/tv_dateSelected"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dateSelected" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

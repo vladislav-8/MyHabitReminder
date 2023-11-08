@@ -1,4 +1,4 @@
-package com.practicum.myhabitreminder.domain.usecase
+package com.practicum.myhabitreminder.domain.usecase.firebase
 
 import com.practicum.myhabitreminder.domain.repository.AuthRepository
 

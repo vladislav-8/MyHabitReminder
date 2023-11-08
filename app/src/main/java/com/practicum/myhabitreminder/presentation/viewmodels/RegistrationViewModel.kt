@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.practicum.myhabitreminder.common.utils.TaskResult
-import com.practicum.myhabitreminder.domain.usecase.SignUpUseCase
+import com.practicum.myhabitreminder.domain.usecase.firebase.SignUpUseCase
 import com.practicum.myhabitreminder.presentation.models.AuthFlowScreenState
 import kotlinx.coroutines.launch
 

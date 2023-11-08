@@ -85,4 +85,8 @@
         <item name="android:textColorHint">@color/white</item>
     </style>
 
+    <style name="ProgressBarStyle">
+        <item name="colorAccent">@color/orange</item>
+    </style>
+
 </resources>

@@ -1,15 +1,14 @@
 package com.practicum.myhabitreminder.presentation.fragments
 
 import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
-import android.widget.TimePicker
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.practicum.myhabitreminder.R
@@ -20,20 +19,8 @@ import com.practicum.myhabitreminder.presentation.viewmodels.HabitViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Calendar
 
-class CreateHabitFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
+class CreateHabitFragment : Fragment(),
     DatePickerDialog.OnDateSetListener {
-
-    private var title = ""
-    private var description = ""
-    private var timeStamp = ""
-
-    private var day = 0
-    private var month = 0
-    private var year = 0
-    private var hour = 0
-    private var minute = 0
-    private var cleanDate = ""
-    private var cleanTime = ""
 
     private var mSelectedCategory: String = "animal"
 
@@ -67,21 +54,16 @@ class CreateHabitFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
     private fun initListeners() {
         binding.btnPickDate.setOnClickListener {
             getDateCalendar()
-            DatePickerDialog(requireContext(), this, year, month, day).show()
+            DatePickerDialog(requireContext(), this, viewModel.year, viewModel.month, viewModel.day).show()
         }
-        binding.btnPickTime.setOnClickListener {
-            getTimeCalendar()
-            TimePickerDialog(context, this, hour, minute, true).show()
-        }
+
         binding.btnConfirm.setOnClickListener {
-            title = binding.etHabitTitle.text.toString()
-            description = binding.etHabitDescription.text.toString()
-            timeStamp = "$cleanDate $cleanTime"
+            viewModel.title = binding.etHabitTitle.text.toString()
+            viewModel.description = binding.etHabitDescription.text.toString()
+            viewModel.timeStamp = viewModel.cleanDate
 
-            if (!(title.isEmpty() || description.isEmpty() || cleanDate.isBlank() || cleanTime.isBlank())) {
-                Log.d("TAG", timeStamp)
-
-                val habit = Habit(0, title, description, timeStamp)
+            if (!(viewModel.title.isEmpty() || viewModel.description.isEmpty() || viewModel.cleanDate.isBlank())) {
+                val habit = Habit(0, viewModel.title, viewModel.description, viewModel.timeStamp)
                 viewModel.addHabit(habit)
                 Toast.makeText(context, R.string.habit_created, Toast.LENGTH_SHORT).show()
                 findNavController().popBackStack()
@@ -92,28 +74,16 @@ class CreateHabitFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
         }
     }
 
-    override fun onTimeSet(p0: TimePicker?, hour: Int, minute: Int) {
-        cleanTime = Calculations.cleanTime(hour, minute)
-        binding.tvTimeSelected.text = String.format(getString(R.string.time), cleanTime)
-    }
-
     override fun onDateSet(p0: DatePicker?, year: Int, month: Int, day: Int) {
-        cleanDate = Calculations.cleanDate(day, month, year)
-        binding.tvDateSelected.text = String.format(getString(R.string.date), cleanDate)
-    }
-
-    //get the current time
-    private fun getTimeCalendar() {
-        val cal = Calendar.getInstance()
-        hour = cal.get(Calendar.HOUR_OF_DAY)
-        minute = cal.get(Calendar.MINUTE)
+        viewModel.cleanDate = Calculations.cleanDate(day, month, year)
+        binding.tvDateSelected.text = String.format(getString(R.string.date), viewModel.cleanDate)
     }
 
     //get the current date
     private fun getDateCalendar() {
         val cal = Calendar.getInstance()
-        day = cal.get(Calendar.DAY_OF_MONTH)
-        month = cal.get(Calendar.MONTH)
-        year = cal.get(Calendar.YEAR)
+        viewModel.day = cal.get(Calendar.DAY_OF_MONTH)
+        viewModel.month = cal.get(Calendar.MONTH)
+        viewModel.year = cal.get(Calendar.YEAR)
     }
 }

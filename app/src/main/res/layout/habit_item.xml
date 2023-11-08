@@ -53,23 +53,21 @@
 
 
             <TextView
-                android:id="@+id/tv_item_api_joke"
+                android:id="@+id/tv_days_counter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="4"
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
-                tools:text="api joke" />
+                android:textSize="22sp"
+                tools:text="days counter: 0" />
 
             <TextView
                 android:id="@+id/tv_item_createdTimeStamp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:maxLines="2"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
-                tools:text="Created 12/12/20 at 20:00" />
+                tools:text="Created 12/12/20" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
