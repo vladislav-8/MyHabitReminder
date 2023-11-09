@@ -18,7 +18,7 @@ import com.practicum.myhabitreminder.presentation.models.TimerState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class HabitViewModel(
+class ViewModel(
     private val habitRepository: HabitRepository,
     private val getTimerLengthUseCase: GetTimerLengthUseCase,
     private val getPreviousTimerLengthSeconds: GetPreviousTimerLengthSecondsUseCase,
@@ -26,21 +26,18 @@ class HabitViewModel(
     private val setTimerStateUseCase: SetTimerStateUseCase,
     private val setPreviousTimerLengthSeconds: SetPreviousTimerLengthSecondsUseCase,
     private val getTimerState: GetTimerStateUseCase,
-    private val getSecondsRemaining: GetSecondsRemainingUseCase
+    private val getSecondsRemaining: GetSecondsRemainingUseCase,
 ) : ViewModel() {
 
     var timerLengthSeconds = 0L
-
-
     var title = ""
     var description = ""
     var timeStamp = ""
-    var daysCounter = 0
-
     var day = 0
     var month = 0
     var year = 0
     var cleanDate = ""
+    var daysCounter = 0
 
     private val stateLiveData = MutableLiveData<HabitState>()
     fun observeState(): LiveData<HabitState> = stateLiveData
@@ -89,6 +86,7 @@ class HabitViewModel(
     }
 
     fun setNewTimerLength() {
+        //1800L
         val lengthInMinutes = getTimerLengthUseCase.invoke()
         timerLengthSeconds = (lengthInMinutes * 1800L)
     }

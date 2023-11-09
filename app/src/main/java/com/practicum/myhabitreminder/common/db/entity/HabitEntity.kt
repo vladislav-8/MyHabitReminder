@@ -12,7 +12,8 @@ data class HabitEntity(
     val id: Int,
     val title: String?,
     val description: String?,
-    val timeStamp: String?
+    val timeStamp: String?,
+    val daysCounter: Int?
 ): Parcelable
 
 {
@@ -21,6 +22,7 @@ data class HabitEntity(
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
+        parcel.readInt(),
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

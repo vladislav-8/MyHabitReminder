@@ -2,8 +2,6 @@ package com.practicum.myhabitreminder.presentation.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +13,7 @@ import com.practicum.myhabitreminder.R
 import com.practicum.myhabitreminder.common.utils.Calculations
 import com.practicum.myhabitreminder.databinding.FragmentCreateHabitBinding
 import com.practicum.myhabitreminder.domain.models.Habit
-import com.practicum.myhabitreminder.presentation.viewmodels.HabitViewModel
+import com.practicum.myhabitreminder.presentation.viewmodels.ViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Calendar
 
@@ -26,7 +24,7 @@ class CreateHabitFragment : Fragment(),
 
     private var _binding: FragmentCreateHabitBinding? = null
     private val binding get() = _binding!!
-    private val viewModel by viewModel<HabitViewModel>()
+    private val viewModel by viewModel<ViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,7 +61,7 @@ class CreateHabitFragment : Fragment(),
             viewModel.timeStamp = viewModel.cleanDate
 
             if (!(viewModel.title.isEmpty() || viewModel.description.isEmpty() || viewModel.cleanDate.isBlank())) {
-                val habit = Habit(0, viewModel.title, viewModel.description, viewModel.timeStamp)
+                val habit = Habit(0, viewModel.title, viewModel.description, viewModel.timeStamp, viewModel.daysCounter)
                 viewModel.addHabit(habit)
                 Toast.makeText(context, R.string.habit_created, Toast.LENGTH_SHORT).show()
                 findNavController().popBackStack()

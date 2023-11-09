@@ -10,7 +10,8 @@ class ConverterDb {
             id = from.id,
             title = from.title!!,
             description = from.description!!,
-            timeStamp = from.timeStamp!!
+            timeStamp = from.timeStamp!!,
+            daysCounter = from.daysCounter!!
         )
     }
 
@@ -20,6 +21,7 @@ class ConverterDb {
             title = from.title,
             description = from.description,
             timeStamp = from.timeStamp,
+            daysCounter = from.daysCounter
             )
     }
 }

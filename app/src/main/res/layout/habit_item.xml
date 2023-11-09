@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:textSize="22sp"
-                tools:text="days counter: 0" />
+                tools:text="some joke from api" />
 
             <TextView
                 android:id="@+id/tv_item_createdTimeStamp"

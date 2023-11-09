@@ -9,7 +9,7 @@
     <string name="time">Time: %s</string>
     <string name="date">Date: %s</string>
     <string name="habit_title">Habit title</string>
-    <string name="give_it_a_short_description">Give it a short description</string>
+    <string name="how_many_days">How many days?</string>
     <string name="pick_a_date">Pick a date</string>
     <string name="date_not_selected">Date: (not selected)</string>
     <string name="pick_a_time">Pick a time</string>

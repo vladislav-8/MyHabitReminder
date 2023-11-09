@@ -2,6 +2,7 @@ package com.practicum.myhabitreminder.presentation.fragments
 
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,7 @@ import com.practicum.myhabitreminder.databinding.FragmentAppBinding
 import com.practicum.myhabitreminder.domain.models.Habit
 import com.practicum.myhabitreminder.presentation.models.HabitState
 import com.practicum.myhabitreminder.presentation.models.TimerState
-import com.practicum.myhabitreminder.presentation.viewmodels.HabitViewModel
+import com.practicum.myhabitreminder.presentation.viewmodels.ViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AppFragment : Fragment() {
@@ -30,7 +31,7 @@ class AppFragment : Fragment() {
     private val habitsAdapter by lazy {
         HabitAdapter({ showHabits(habit = it) }, { showLongClickOnHabit(habit = it) })
     }
-    private val viewModel by viewModel<HabitViewModel>()
+    private val viewModel by viewModel<ViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,7 +68,6 @@ class AppFragment : Fragment() {
         binding.deleteHabitsButton.setOnClickListener {
             viewModel.deleteAllHabits()
             habitsAdapter.clearHabits()
-            onTimerFinished()
             setNewTimerLength()
             timer?.cancel()
             clearContent()
@@ -89,6 +89,7 @@ class AppFragment : Fragment() {
             fabStop.setOnClickListener {
                 timer?.cancel()
                 onTimerFinished()
+                viewModel.getAllHabits()
             }
         }
     }
@@ -193,7 +194,12 @@ class AppFragment : Fragment() {
     private fun onTimerFinished() {
         timerState = TimerState.STOPPED
         setPreviousTimerLength()
-        viewModel.daysCounter++
+
+        for (i in habitsAdapter.habits.indices) {
+            habitsAdapter.habits[i].daysCounter++
+            viewModel.updateHabit(habitsAdapter.habits[i])
+        }
+
 
         binding.progressCountdown.progress = 0
         viewModel.setSecondsRemaining(viewModel.timerLengthSeconds)
@@ -268,8 +274,8 @@ class AppFragment : Fragment() {
 
         when (timerState) {
             TimerState.RUNNING -> timer?.cancel()
-            TimerState.PAUSED -> {}
-            TimerState.STOPPED -> {}
+            TimerState.PAUSED -> Unit
+            TimerState.STOPPED -> Unit
         }
 
         viewModel.setPreviousTimerLengthSeconds(viewModel.timerLengthSeconds)
