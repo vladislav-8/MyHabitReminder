@@ -17,7 +17,7 @@ class HabitViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(model: Habit) {
         habitTitle.text = model.title
-        habitDescription.text = model.description
+        habitDescription.text = "${model.description} days"
         timeStamp.text = "Since: ${model.timeStamp}"
         daysCounter.text = "days count: ${model.daysCounter}"
     }

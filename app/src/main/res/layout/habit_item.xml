@@ -34,14 +34,14 @@
                     android:textColor="@android:color/black"
                     android:textSize="24sp"
                     android:textStyle="bold"
-                    tools:text="Title Big"/>
+                    tools:text="Title Big" />
 
                 <TextView
                     android:id="@+id/tv_item_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@android:color/black"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     tools:text="This is a test description the you can add to each item. It should be short though. 2 lines max*" />
 
                 <View
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:textSize="22sp"
-                tools:text="some joke from api" />
+                tools:text="days count: 210" />
 
             <TextView
                 android:id="@+id/tv_item_createdTimeStamp"
@@ -67,7 +67,7 @@
                 android:layout_marginTop="10dp"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"
-                tools:text="Created 12/12/20" />
+                tools:text="Since 12/12/20" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
