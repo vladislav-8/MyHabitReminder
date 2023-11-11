@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.practicum.myhabitreminder.R
 import com.practicum.myhabitreminder.common.utils.getDetails
 import com.practicum.myhabitreminder.common.utils.toUiText
 import com.practicum.myhabitreminder.databinding.FragmentNewAccountBinding
@@ -61,7 +62,13 @@ class NewAccountFragment : Fragment() {
                 ).show()
             }
 
-            is AuthFlowScreenState.Success -> {}
+            is AuthFlowScreenState.Success -> {
+                findNavController().navigate(R.id.action_newAccountFragment_to_loginFragment)
+                Toast.makeText(
+                    requireContext(), "Account is created",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
 

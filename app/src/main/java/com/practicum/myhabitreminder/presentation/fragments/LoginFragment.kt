@@ -38,14 +38,16 @@ class LoginFragment : Fragment() {
                 binding.username.text.toString(),
                 binding.password.text.toString()
             )
-            findNavController().navigate(R.id.action_loginFragment_to_appFragment)
         }
+
         binding.createAccountTv.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_newAccountFragment)
         }
+
         binding.forgotpass.setOnClickListener {
             ResetPasswordFragment().show(childFragmentManager, TAG_RESETPASS)
         }
+
         viewModel.screenState.observe(viewLifecycleOwner) { state ->
             render(state)
         }
@@ -63,7 +65,9 @@ class LoginFragment : Fragment() {
                 ).show()
             }
 
-            is AuthFlowScreenState.Success -> {}
+            is AuthFlowScreenState.Success -> {
+                findNavController().navigate(R.id.action_loginFragment_to_appFragment)
+            }
         }
     }
 

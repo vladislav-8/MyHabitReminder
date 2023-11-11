@@ -9,10 +9,14 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.practicum.myhabitreminder.R
 import com.practicum.myhabitreminder.databinding.ActivityMainBinding
+import com.practicum.myhabitreminder.presentation.viewmodels.RegistrationViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mainBinding: ActivityMainBinding
+
+    private val viewModel by viewModel<MainActivityViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +33,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.loginFragment -> mainBinding.bottomNavigationView.isVisible = false
                 else -> mainBinding.bottomNavigationView.isVisible = true
             }
+        }
+
+        viewModel.getAuthState().observe(this) { isSignedIn ->
+            if (isSignedIn)
+                navController.navigate(R.id.appFragment)
+            else
+                navController.navigate(R.id.loginFragment)
         }
     }
 }

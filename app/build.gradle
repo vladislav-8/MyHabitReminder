@@ -57,8 +57,11 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
 
     //viewmodel
+    def lifecycleVer = "2.6.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
     implementation "androidx.activity:activity-ktx:1.7.2"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${lifecycleVer}"
+    implementation "androidx.lifecycle:lifecycle-common-java8:${lifecycleVer}"
 
     //koin
     implementation "io.insert-koin:koin-android:3.4.2"

@@ -14,7 +14,7 @@ import com.practicum.myhabitreminder.domain.usecase.timer.SetPreviousTimerLength
 import com.practicum.myhabitreminder.domain.usecase.timer.GetTimerLengthUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.SetSecondsRemainingUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.SetTimerStateUseCase
-import com.practicum.myhabitreminder.presentation.viewmodels.ViewModel
+import com.practicum.myhabitreminder.presentation.viewmodels.HabitViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.singleOf
@@ -27,7 +27,7 @@ val habitModule = module {
         HabitRepositoryImpl(database = get(), converter = get())
     }
 
-    viewModelOf(::ViewModel)
+    viewModelOf(::HabitViewModel)
 
 
     singleOf(::GetPreviousTimerLengthSecondsUseCase)

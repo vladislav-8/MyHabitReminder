@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.practicum.myhabitreminder.domain.models.Habit
 import com.practicum.myhabitreminder.domain.repository.HabitRepository
+import com.practicum.myhabitreminder.domain.usecase.firebase.LogOutUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.GetPreviousTimerLengthSecondsUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.GetSecondsRemainingUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.GetTimerLengthUseCase
@@ -18,7 +19,7 @@ import com.practicum.myhabitreminder.presentation.models.TimerState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ViewModel(
+class HabitViewModel(
     private val habitRepository: HabitRepository,
     private val getTimerLengthUseCase: GetTimerLengthUseCase,
     private val getPreviousTimerLengthSeconds: GetPreviousTimerLengthSecondsUseCase,
@@ -27,6 +28,7 @@ class ViewModel(
     private val setPreviousTimerLengthSeconds: SetPreviousTimerLengthSecondsUseCase,
     private val getTimerState: GetTimerStateUseCase,
     private val getSecondsRemaining: GetSecondsRemainingUseCase,
+    private val logOutUseCase: LogOutUseCase,
 ) : ViewModel() {
 
     var timerLengthSeconds = 0L
@@ -54,6 +56,10 @@ class ViewModel(
                     }
                 }
         }
+    }
+
+    fun logOut() {
+        logOutUseCase.invoke()
     }
 
     private fun renderState(state: HabitState) {

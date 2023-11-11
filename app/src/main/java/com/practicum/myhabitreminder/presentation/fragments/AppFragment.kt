@@ -2,11 +2,11 @@ package com.practicum.myhabitreminder.presentation.fragments
 
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -16,7 +16,7 @@ import com.practicum.myhabitreminder.databinding.FragmentAppBinding
 import com.practicum.myhabitreminder.domain.models.Habit
 import com.practicum.myhabitreminder.presentation.models.HabitState
 import com.practicum.myhabitreminder.presentation.models.TimerState
-import com.practicum.myhabitreminder.presentation.viewmodels.ViewModel
+import com.practicum.myhabitreminder.presentation.viewmodels.HabitViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AppFragment : Fragment() {
@@ -31,7 +31,7 @@ class AppFragment : Fragment() {
     private val habitsAdapter by lazy {
         HabitAdapter({ showHabits(habit = it) }, { showLongClickOnHabit(habit = it) })
     }
-    private val viewModel by viewModel<ViewModel>()
+    private val viewModel by viewModel<HabitViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +48,15 @@ class AppFragment : Fragment() {
         initAdapters()
         initObservers()
         initButtons()
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    viewModel.logOut()
+                    findNavController().popBackStack()
+                }
+            })
     }
 
     private fun initAdapters() {
@@ -72,6 +81,7 @@ class AppFragment : Fragment() {
             timer?.cancel()
             clearContent()
         }
+
     }
 
     private fun initButtons() {

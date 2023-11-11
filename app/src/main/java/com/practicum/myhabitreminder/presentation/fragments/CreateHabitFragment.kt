@@ -13,7 +13,7 @@ import com.practicum.myhabitreminder.R
 import com.practicum.myhabitreminder.common.utils.Calculations
 import com.practicum.myhabitreminder.databinding.FragmentCreateHabitBinding
 import com.practicum.myhabitreminder.domain.models.Habit
-import com.practicum.myhabitreminder.presentation.viewmodels.ViewModel
+import com.practicum.myhabitreminder.presentation.viewmodels.HabitViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.Calendar
 
@@ -24,7 +24,7 @@ class CreateHabitFragment : Fragment(),
 
     private var _binding: FragmentCreateHabitBinding? = null
     private val binding get() = _binding!!
-    private val viewModel by viewModel<ViewModel>()
+    private val viewModel by viewModel<HabitViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
