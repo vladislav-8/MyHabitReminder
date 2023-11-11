@@ -16,7 +16,7 @@ data class Details(
 )
 
 fun ErrorType.getDetails(): Details = when (this) {
-    is ErrorType.AuthFailed -> Details(message = message)
+    is ErrorType.AuthFailed -> Details(message = "Please Enter Login and Pass")
     is ErrorType.AlreadySignedIn -> Details(stringResourceId = R.string.already_signed_in_error)
     else -> Details(stringResourceId = R.string.unknown_error)
 }
