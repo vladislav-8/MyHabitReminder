@@ -2,14 +2,10 @@ package com.practicum.myhabitreminder
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.practicum.myhabitreminder.R
 import com.practicum.myhabitreminder.databinding.ActivityMainBinding
-import com.practicum.myhabitreminder.presentation.viewmodels.RegistrationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {

@@ -26,10 +26,10 @@
         tools:layout="@layout/fragment_app" >
         <action
             android:id="@+id/action_appFragment_to_creatHabitFragment"
-            app:destination="@id/creatHabitFragment" />
+            app:destination="@id/createHabitFragment" />
     </fragment>
     <fragment
-        android:id="@+id/creatHabitFragment"
+        android:id="@+id/createHabitFragment"
         android:name="com.practicum.myhabitreminder.presentation.fragments.CreateHabitFragment"
         android:label="fragment_creat_habit"
         tools:layout="@layout/fragment_create_habit" >

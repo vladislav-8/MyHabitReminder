@@ -34,8 +34,7 @@ class AppFragment : Fragment() {
     private val viewModel by viewModel<HabitViewModel>()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAppBinding.inflate(inflater, container, false)
         return binding.root
@@ -49,8 +48,7 @@ class AppFragment : Fragment() {
         initObservers()
         initButtons()
 
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     viewModel.logOut()
@@ -140,19 +138,18 @@ class AppFragment : Fragment() {
 
     private fun showConfirmDialog(habit: Habit) {
         context?.let { context ->
-            MaterialAlertDialogBuilder(requireContext(), R.style.MyDialogTheme)
-                .setMessage(requireContext().getString(R.string.are_you_sure_to_delete_habit))
-                .setNegativeButton(R.string.no) { dialog, which -> }
+            MaterialAlertDialogBuilder(requireContext(), R.style.MyDialogTheme).setMessage(
+                requireContext().getString(R.string.are_you_sure_to_delete_habit)
+            ).setNegativeButton(R.string.no) { dialog, which -> }
                 .setPositiveButton(R.string.yes) { dialog, which ->
                     habit.let { habit ->
                         viewModel.deleteHabit(habit)
-                        val indexToRemove =
-                            habitsAdapter.habits.indexOfFirst { it.id == habit.id }
+                        val indexToRemove = habitsAdapter.habits.indexOfFirst { it.id == habit.id }
                         if (indexToRemove != DELETE_HABIT) {
                             indexToRemove.let { habitsAdapter.habits.removeAt(it) }
                             indexToRemove.let { habitsAdapter.notifyItemRemoved(it) }
+                            viewModel.getAllHabits()
                         }
-                        binding.deleteHabitsButton.isVisible = false
                     }
                 }.show()
         }
@@ -180,22 +177,17 @@ class AppFragment : Fragment() {
 
         //we don't want to change the length of the timer which is already running
         //if the length was changed in settings while it was backgrounded
-        if (timerState == TimerState.STOPPED)
-            setNewTimerLength()
-        else
-            setPreviousTimerLength()
+        if (timerState == TimerState.STOPPED) setNewTimerLength()
+        else setPreviousTimerLength()
 
         secondsRemaining =
-            if (timerState == TimerState.RUNNING || timerState == TimerState.PAUSED)
-                viewModel.getSecondsRemaining()
-            else
-                viewModel.timerLengthSeconds
+            if (timerState == TimerState.RUNNING || timerState == TimerState.PAUSED) viewModel.getSecondsRemaining()
+            else viewModel.timerLengthSeconds
 
         //TODO: change secondsRemaining according to where the background timer stopped
 
         //resume where we left off
-        if (timerState == TimerState.RUNNING)
-            startTimer()
+        if (timerState == TimerState.RUNNING) startTimer()
 
         updateButtons()
         updateCountdownUI()
