@@ -15,8 +15,6 @@ https://lifehacker.ru/kak-teoriya-poluchasa-mozhet-izmenit-vashu-zhizn/ ссыл
 
 ![image](https://github.com/vladislav-8/MyHabitReminder/assets/116372579/7ffe1b45-792a-4f0a-b151-b0563463cc3c)
 
-![image](https://github.com/vladislav-8/MyHabitReminder/assets/116372579/c7dbbfb6-a02e-454d-8a5b-9352defd990a)
-
 ![image](https://github.com/vladislav-8/MyHabitReminder/assets/116372579/939dd178-605d-42d5-ac06-bd46be845391)
 
 
