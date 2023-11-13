@@ -70,7 +70,7 @@ class AppFragment : Fragment() {
 
     private fun initListeners() {
         binding.fabAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_appFragment_to_creatHabitFragment)
+            findNavController().navigate(R.id.action_appFragment_to_createHabitFragment)
         }
         binding.deleteHabitsButton.setOnClickListener {
             viewModel.deleteAllHabits()

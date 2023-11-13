@@ -22,15 +22,6 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         val navController = navHostFragment.navController
 
-        mainBinding.bottomNavigationView.setupWithNavController(navController)
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.loginFragment, R.id.newAccountFragment -> mainBinding.bottomNavigationView.isVisible = false
-                else -> mainBinding.bottomNavigationView.isVisible = true
-            }
-        }
-
         viewModel.getAuthState().observe(this) { isSignedIn ->
             if (isSignedIn)
                 navController.navigate(R.id.appFragment)

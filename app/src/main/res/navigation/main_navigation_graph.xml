@@ -25,18 +25,14 @@
         android:label="fragment_app"
         tools:layout="@layout/fragment_app" >
         <action
-            android:id="@+id/action_appFragment_to_creatHabitFragment"
+            android:id="@+id/action_appFragment_to_createHabitFragment"
             app:destination="@id/createHabitFragment" />
     </fragment>
     <fragment
         android:id="@+id/createHabitFragment"
         android:name="com.practicum.myhabitreminder.presentation.fragments.CreateHabitFragment"
-        android:label="fragment_creat_habit"
-        tools:layout="@layout/fragment_create_habit" >
-        <action
-            android:id="@+id/action_creatHabitFragment_to_appFragment"
-            app:destination="@id/appFragment" />
-    </fragment>
+        android:label="fragment_create_habit"
+        tools:layout="@layout/fragment_create_habit" />
     <fragment
         android:id="@+id/newAccountFragment"
         android:name="com.practicum.myhabitreminder.presentation.fragments.NewAccountFragment"

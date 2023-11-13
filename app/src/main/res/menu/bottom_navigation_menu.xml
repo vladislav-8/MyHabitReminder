@@ -7,7 +7,7 @@
         android:title="@string/habits" />
 
     <item
-        android:id="@+id/createHabitFragment"
+        android:id="@+id/SettingsFragment"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings" />
 

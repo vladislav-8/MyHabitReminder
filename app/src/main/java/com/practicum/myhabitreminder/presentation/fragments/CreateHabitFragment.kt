@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.fragment.findNavController
 import com.practicum.myhabitreminder.R
 import com.practicum.myhabitreminder.common.utils.Calculations
@@ -44,12 +47,7 @@ class CreateHabitFragment : Fragment(),
         }*/ // tut shutki pribautki
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    private fun initListeners() {
+        private fun initListeners() {
         binding.btnPickDate.setOnClickListener {
             getDateCalendar()
             DatePickerDialog(requireContext(), this, viewModel.year, viewModel.month, viewModel.day).show()
@@ -83,5 +81,10 @@ class CreateHabitFragment : Fragment(),
         viewModel.day = cal.get(Calendar.DAY_OF_MONTH)
         viewModel.month = cal.get(Calendar.MONTH)
         viewModel.year = cal.get(Calendar.YEAR)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
