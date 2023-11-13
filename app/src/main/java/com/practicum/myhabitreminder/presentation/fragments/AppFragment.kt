@@ -70,7 +70,7 @@ class AppFragment : Fragment() {
 
     private fun initListeners() {
         binding.fabAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_appFragment_to_createHabitFragment)
+            findNavController().navigate(R.id.createHabitFragment)
         }
         binding.deleteHabitsButton.setOnClickListener {
             viewModel.deleteAllHabits()
@@ -201,7 +201,6 @@ class AppFragment : Fragment() {
             habitsAdapter.habits[i].daysCounter++
             viewModel.updateHabit(habitsAdapter.habits[i])
         }
-
 
         binding.progressCountdown.progress = 0
         viewModel.setSecondsRemaining(viewModel.timerLengthSeconds)

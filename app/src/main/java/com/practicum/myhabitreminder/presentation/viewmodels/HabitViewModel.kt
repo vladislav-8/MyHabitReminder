@@ -17,6 +17,7 @@ import com.practicum.myhabitreminder.domain.usecase.timer.SetTimerStateUseCase
 import com.practicum.myhabitreminder.presentation.models.HabitState
 import com.practicum.myhabitreminder.presentation.models.TimerState
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class HabitViewModel(
@@ -46,6 +47,7 @@ class HabitViewModel(
 
     fun getAllHabits() {
         viewModelScope.launch {
+            delay(500)
             habitRepository
                 .getAllHabits()
                 .collect { habits ->

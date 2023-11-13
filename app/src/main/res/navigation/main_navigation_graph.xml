@@ -23,16 +23,16 @@
         android:id="@+id/appFragment"
         android:name="com.practicum.myhabitreminder.presentation.fragments.AppFragment"
         android:label="fragment_app"
-        tools:layout="@layout/fragment_app" >
-        <action
-            android:id="@+id/action_appFragment_to_createHabitFragment"
-            app:destination="@id/createHabitFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_app" />
     <fragment
         android:id="@+id/createHabitFragment"
         android:name="com.practicum.myhabitreminder.presentation.fragments.CreateHabitFragment"
         android:label="fragment_create_habit"
-        tools:layout="@layout/fragment_create_habit" />
+        tools:layout="@layout/fragment_create_habit" >
+        <action
+            android:id="@+id/action_createHabitFragment_to_appFragment"
+            app:destination="@id/appFragment" />
+    </fragment>
     <fragment
         android:id="@+id/newAccountFragment"
         android:name="com.practicum.myhabitreminder.presentation.fragments.NewAccountFragment"
@@ -47,4 +47,9 @@
         android:name="com.practicum.myhabitreminder.presentation.fragments.ResetPasswordFragment"
         android:label="fragment_reset_password"
         tools:layout="@layout/fragment_reset_password" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.practicum.myhabitreminder.presentation.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

@@ -63,7 +63,6 @@ class CreateHabitFragment : Fragment(),
                 viewModel.addHabit(habit)
                 Toast.makeText(context, R.string.habit_created, Toast.LENGTH_SHORT).show()
                 findNavController().popBackStack()
-
             } else {
                 Toast.makeText(context, "Please fill all the fields", Toast.LENGTH_SHORT).show()
             }
