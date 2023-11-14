@@ -1,5 +1,9 @@
 package com.practicum.myhabitreminder.presentation.fragments
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
@@ -12,12 +16,14 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.practicum.myhabitreminder.R
 import com.practicum.myhabitreminder.common.diffutil.HabitAdapter
+import com.practicum.myhabitreminder.data.TimerExpiredReceiver
 import com.practicum.myhabitreminder.databinding.FragmentAppBinding
 import com.practicum.myhabitreminder.domain.models.Habit
 import com.practicum.myhabitreminder.presentation.models.HabitState
 import com.practicum.myhabitreminder.presentation.models.TimerState
 import com.practicum.myhabitreminder.presentation.viewmodels.HabitViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.Calendar
 
 class AppFragment : Fragment() {
 
@@ -27,6 +33,10 @@ class AppFragment : Fragment() {
     private var timer: CountDownTimer? = null
     var secondsRemaining = 0L
     private var timerState = TimerState.STOPPED
+
+    val nowSeconds: Long
+        get() = Calendar.getInstance().timeInMillis / 1000
+
 
     private val habitsAdapter by lazy {
         HabitAdapter({ showHabits(habit = it) }, { showLongClickOnHabit(habit = it) })
@@ -184,10 +194,16 @@ class AppFragment : Fragment() {
             if (timerState == TimerState.RUNNING || timerState == TimerState.PAUSED) viewModel.getSecondsRemaining()
             else viewModel.timerLengthSeconds
 
-        //TODO: change secondsRemaining according to where the background timer stopped
+        val alarmSetTime = viewModel.getAlarmSetTime()
+        if (alarmSetTime > 0) {
+            secondsRemaining -= nowSeconds - alarmSetTime
+        }
+
+        if (secondsRemaining <= 0)
+            onTimerFinished()
 
         //resume where we left off
-        if (timerState == TimerState.RUNNING) startTimer()
+        else if (timerState == TimerState.RUNNING) startTimer()
 
         updateButtons()
         updateCountdownUI()
@@ -265,18 +281,40 @@ class AppFragment : Fragment() {
         }
     }
 
+    fun setAlarm(context: Context, nowSeconds: Long, secondsRemaining: Long): Long {
+        val wakeUpTime = (nowSeconds + secondsRemaining) * 1000
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(context, TimerExpiredReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeUpTime, pendingIntent)
+        viewModel.setAlarmSetTime(nowSeconds)
+        return wakeUpTime
+    }
+
+    fun removeAlarm(context: Context) {
+        val intent = Intent(context, TimerExpiredReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.cancel(pendingIntent)
+        viewModel.setAlarmSetTime(0)
+    }
+
     override fun onResume() {
         super.onResume()
         initTimer()
+        removeAlarm(requireContext())
     }
 
     override fun onPause() {
         super.onPause()
 
-        when (timerState) {
-            TimerState.RUNNING -> timer?.cancel()
-            TimerState.PAUSED -> Unit
-            TimerState.STOPPED -> Unit
+        if (timerState == TimerState.RUNNING){
+            timer?.cancel()
+            val wakeUpTime = setAlarm(requireContext(), nowSeconds, secondsRemaining)
+            //TODO: show notification
+        }
+        else if (timerState == TimerState.PAUSED){
+            //TODO: show notification
         }
 
         viewModel.setPreviousTimerLengthSeconds(viewModel.timerLengthSeconds)

@@ -7,10 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.practicum.myhabitreminder.domain.models.Habit
 import com.practicum.myhabitreminder.domain.repository.HabitRepository
 import com.practicum.myhabitreminder.domain.usecase.firebase.LogOutUseCase
+import com.practicum.myhabitreminder.domain.usecase.timer.GetAlarmSetTimeUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.GetPreviousTimerLengthSecondsUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.GetSecondsRemainingUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.GetTimerLengthUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.GetTimerStateUseCase
+import com.practicum.myhabitreminder.domain.usecase.timer.SetAlarmSetTimeUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.SetPreviousTimerLengthSecondsUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.SetSecondsRemainingUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.SetTimerStateUseCase
@@ -30,6 +32,8 @@ class HabitViewModel(
     private val getTimerState: GetTimerStateUseCase,
     private val getSecondsRemaining: GetSecondsRemainingUseCase,
     private val logOutUseCase: LogOutUseCase,
+    private val setAlarmSetTimeUseCase: SetAlarmSetTimeUseCase,
+    private val getAlarmSetTimeUseCase: GetAlarmSetTimeUseCase
 ) : ViewModel() {
 
     var timerLengthSeconds = 0L
@@ -122,5 +126,13 @@ class HabitViewModel(
 
     fun getSecondsRemaining(): Long {
        return getSecondsRemaining.invoke()
+    }
+
+    fun setAlarmSetTime(time: Long) {
+        setAlarmSetTimeUseCase.invoke(time)
+    }
+
+    fun getAlarmSetTime(): Long {
+        return getAlarmSetTimeUseCase.invoke()
     }
 }

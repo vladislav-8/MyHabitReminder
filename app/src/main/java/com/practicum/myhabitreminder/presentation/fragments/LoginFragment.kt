@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.practicum.myhabitreminder.R
 import com.practicum.myhabitreminder.common.utils.getDetails
 import com.practicum.myhabitreminder.common.utils.toUiText

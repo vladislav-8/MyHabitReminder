@@ -1,6 +1,7 @@
 package com.practicum.myhabitreminder.data.impl
 
 import android.content.SharedPreferences
+import com.practicum.myhabitreminder.common.utils.ALARM_SET_TIME_ID
 import com.practicum.myhabitreminder.common.utils.PREVIOUS_TIMER_LENGTH_SECONDS_ID
 import com.practicum.myhabitreminder.common.utils.SECONDS_REMAINING_ID
 import com.practicum.myhabitreminder.common.utils.TIMER_STATE_ID
@@ -14,7 +15,7 @@ class StorageRepositoryImpl(private val sharedPreferences: SharedPreferences) : 
     }
 
     override fun getPreviousTimerLengthSeconds(): Long {
-        return sharedPreferences.getLong(PREVIOUS_TIMER_LENGTH_SECONDS_ID, 0) ?: 0
+        return sharedPreferences.getLong(PREVIOUS_TIMER_LENGTH_SECONDS_ID, 0)
     }
 
     override fun setPreviousTimerLengthSeconds(seconds: Long) {
@@ -36,12 +37,22 @@ class StorageRepositoryImpl(private val sharedPreferences: SharedPreferences) : 
     }
 
     override fun getSecondsRemaining(): Long {
-        return sharedPreferences.getLong(SECONDS_REMAINING_ID, 0) ?: 0
+        return sharedPreferences.getLong(SECONDS_REMAINING_ID, 0)
     }
 
     override fun setSecondsRemaining(seconds: Long) {
         sharedPreferences.edit()
             ?.putLong(SECONDS_REMAINING_ID, seconds)
+            ?.apply()
+    }
+
+    override fun getAlarmSetTime(): Long {
+        return sharedPreferences.getLong(ALARM_SET_TIME_ID, 0)
+    }
+
+    override fun setAlarmSetTime(time: Long) {
+        sharedPreferences.edit()
+            ?.putLong(ALARM_SET_TIME_ID, time)
             ?.apply()
     }
 }

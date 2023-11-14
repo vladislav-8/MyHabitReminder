@@ -17,4 +17,8 @@ interface StorageRepository {
     fun getSecondsRemaining(): Long
 
     fun setSecondsRemaining(seconds: Long)
+
+    fun getAlarmSetTime(): Long
+
+    fun setAlarmSetTime(time: Long)
 }

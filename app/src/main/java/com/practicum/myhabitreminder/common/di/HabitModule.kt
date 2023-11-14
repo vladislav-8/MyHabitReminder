@@ -7,11 +7,13 @@ import com.practicum.myhabitreminder.data.impl.HabitRepositoryImpl
 import com.practicum.myhabitreminder.data.impl.StorageRepositoryImpl
 import com.practicum.myhabitreminder.domain.repository.HabitRepository
 import com.practicum.myhabitreminder.domain.repository.StorageRepository
+import com.practicum.myhabitreminder.domain.usecase.timer.GetAlarmSetTimeUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.GetPreviousTimerLengthSecondsUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.GetSecondsRemainingUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.GetTimerStateUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.SetPreviousTimerLengthSecondsUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.GetTimerLengthUseCase
+import com.practicum.myhabitreminder.domain.usecase.timer.SetAlarmSetTimeUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.SetSecondsRemainingUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.SetTimerStateUseCase
 import com.practicum.myhabitreminder.presentation.viewmodels.HabitViewModel
@@ -29,7 +31,6 @@ val habitModule = module {
 
     viewModelOf(::HabitViewModel)
 
-
     singleOf(::GetPreviousTimerLengthSecondsUseCase)
     singleOf(::GetSecondsRemainingUseCase)
     singleOf(::GetTimerStateUseCase)
@@ -38,6 +39,14 @@ val habitModule = module {
     singleOf(::SetSecondsRemainingUseCase)
     singleOf(::SetTimerStateUseCase)
     singleOf(::StorageRepositoryImpl) bind StorageRepository::class
+
+    factory<GetAlarmSetTimeUseCase> {
+        GetAlarmSetTimeUseCase(repository = get())
+    }
+
+    factory<SetAlarmSetTimeUseCase> {
+        SetAlarmSetTimeUseCase(repository = get())
+    }
 
     single<SharedPreferences> {
         androidContext().getSharedPreferences(TIMER_STATE_ID, Context.MODE_PRIVATE)
