@@ -1,9 +1,11 @@
 package com.practicum.myhabitreminder.presentation.fragments
 
-import android.app.AlarmManager
-import android.app.PendingIntent
+import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
-import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
@@ -11,19 +13,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.practicum.myhabitreminder.R
 import com.practicum.myhabitreminder.common.diffutil.HabitAdapter
-import com.practicum.myhabitreminder.data.TimerExpiredReceiver
 import com.practicum.myhabitreminder.databinding.FragmentAppBinding
 import com.practicum.myhabitreminder.domain.models.Habit
 import com.practicum.myhabitreminder.presentation.models.HabitState
 import com.practicum.myhabitreminder.presentation.models.TimerState
 import com.practicum.myhabitreminder.presentation.viewmodels.HabitViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.Calendar
+
+const val CHANNEL_ID = "channel id"
+const val NOTIFICATION_ID = 101
 
 class AppFragment : Fragment() {
 
@@ -33,10 +39,6 @@ class AppFragment : Fragment() {
     private var timer: CountDownTimer? = null
     var secondsRemaining = 0L
     private var timerState = TimerState.STOPPED
-
-    val nowSeconds: Long
-        get() = Calendar.getInstance().timeInMillis / 1000
-
 
     private val habitsAdapter by lazy {
         HabitAdapter({ showHabits(habit = it) }, { showLongClickOnHabit(habit = it) })
@@ -65,6 +67,49 @@ class AppFragment : Fragment() {
                     findNavController().popBackStack()
                 }
             })
+
+        createNotificationChannel()
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Notification Title"
+            val descriptionText = "Notification Description"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+
+            val notificationManager: NotificationManager =
+                context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    private fun sendNotification() {
+        val builder = NotificationCompat.Builder(requireContext(), CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_notifications)
+            .setContentTitle("30 minutes is expired")
+            .setContentText("Congratulations! You get one more day to your goal")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+        with(NotificationManagerCompat.from(requireContext())) {
+            if (ActivityCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return
+            }
+            notify(NOTIFICATION_ID, builder.build())
+        }
     }
 
     private fun initAdapters() {
@@ -108,6 +153,7 @@ class AppFragment : Fragment() {
                 timer?.cancel()
                 onTimerFinished()
                 viewModel.getAllHabits()
+                sendNotification()
             }
         }
     }
@@ -194,11 +240,6 @@ class AppFragment : Fragment() {
             if (timerState == TimerState.RUNNING || timerState == TimerState.PAUSED) viewModel.getSecondsRemaining()
             else viewModel.timerLengthSeconds
 
-        val alarmSetTime = viewModel.getAlarmSetTime()
-        if (alarmSetTime > 0) {
-            secondsRemaining -= nowSeconds - alarmSetTime
-        }
-
         if (secondsRemaining <= 0)
             onTimerFinished()
 
@@ -281,40 +322,20 @@ class AppFragment : Fragment() {
         }
     }
 
-    fun setAlarm(context: Context, nowSeconds: Long, secondsRemaining: Long): Long {
-        val wakeUpTime = (nowSeconds + secondsRemaining) * 1000
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(context, TimerExpiredReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, wakeUpTime, pendingIntent)
-        viewModel.setAlarmSetTime(nowSeconds)
-        return wakeUpTime
-    }
-
-    fun removeAlarm(context: Context) {
-        val intent = Intent(context, TimerExpiredReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-        val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmManager.cancel(pendingIntent)
-        viewModel.setAlarmSetTime(0)
-    }
-
     override fun onResume() {
         super.onResume()
         initTimer()
-        removeAlarm(requireContext())
+        viewModel.setAlarmSetTime(0)
+
     }
 
     override fun onPause() {
         super.onPause()
 
-        if (timerState == TimerState.RUNNING){
+        if (timerState == TimerState.RUNNING) {
             timer?.cancel()
-            val wakeUpTime = setAlarm(requireContext(), nowSeconds, secondsRemaining)
-            //TODO: show notification
-        }
-        else if (timerState == TimerState.PAUSED){
-            //TODO: show notification
+        } else if (timerState == TimerState.PAUSED) {
+
         }
 
         viewModel.setPreviousTimerLengthSeconds(viewModel.timerLengthSeconds)
@@ -329,5 +350,6 @@ class AppFragment : Fragment() {
 
     companion object {
         private const val DELETE_HABIT = -1
+
     }
 }
