@@ -153,7 +153,6 @@ class AppFragment : Fragment() {
                 timer?.cancel()
                 onTimerFinished()
                 viewModel.getAllHabits()
-                sendNotification()
             }
         }
     }
@@ -264,6 +263,7 @@ class AppFragment : Fragment() {
         secondsRemaining = viewModel.timerLengthSeconds
         updateButtons()
         updateCountdownUI()
+        sendNotification()
     }
 
     private fun startTimer() {
@@ -350,6 +350,5 @@ class AppFragment : Fragment() {
 
     companion object {
         private const val DELETE_HABIT = -1
-
     }
 }
