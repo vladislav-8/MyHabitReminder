@@ -11,6 +11,7 @@ import android.widget.DatePicker
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.practicum.myhabitreminder.R
 import com.practicum.myhabitreminder.common.utils.Calculations
 import com.practicum.myhabitreminder.data.network.JokeResponse
@@ -50,12 +51,11 @@ class CreateHabitFragment : Fragment(),
         getJoke()
     }
 
-    fun getJoke() {
-        binding.textView.setOnClickListener {
+    private fun getJoke() {
             CoroutineScope(Dispatchers.Main).launch {
-                binding.textView.text = "${viewModel.getJoke().setup} \n ${viewModel.getJoke().punchline}"
+                val joke = viewModel.getJoke()
+                binding.textView.text = "${joke.setup +"\n"+joke.punchline}"
             }
-        }
     }
 
     private fun initListeners() {
