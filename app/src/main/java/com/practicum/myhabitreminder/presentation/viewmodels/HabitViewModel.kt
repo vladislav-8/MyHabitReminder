@@ -8,6 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.practicum.myhabitreminder.data.network.JokeResponse
 import com.practicum.myhabitreminder.domain.models.Habit
 import com.practicum.myhabitreminder.domain.repository.HabitRepository
+import com.practicum.myhabitreminder.domain.repository.JokeRepository
+import com.practicum.myhabitreminder.domain.usecase.api.GetJokeUseCase
 import com.practicum.myhabitreminder.domain.usecase.firebase.LogOutUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.GetPreviousTimerLengthSecondsUseCase
 import com.practicum.myhabitreminder.domain.usecase.timer.GetSecondsRemainingUseCase
@@ -34,6 +36,7 @@ class HabitViewModel(
     private val getSecondsRemaining: GetSecondsRemainingUseCase,
     private val logOutUseCase: LogOutUseCase,
     private val setAlarmSetTimeUseCase: SetAlarmSetTimeUseCase,
+    private val getJokeUseCase: GetJokeUseCase
 ) : ViewModel() {
 
     var timerLengthSeconds = 0L
@@ -45,6 +48,9 @@ class HabitViewModel(
     var year = 0
     var cleanDate = ""
     var daysCounter = 0
+
+    var setup: String = ""
+    var punchline: String = ""
 
     private val stateLiveData = MutableLiveData<HabitState>()
     fun observeState(): LiveData<HabitState> = stateLiveData
@@ -129,6 +135,10 @@ class HabitViewModel(
 
     fun setAlarmSetTime(time: Long) {
         setAlarmSetTimeUseCase.invoke(time)
+    }
+
+    suspend fun getJoke(): JokeResponse {
+        return getJokeUseCase.invoke()
     }
 }
 

@@ -20,7 +20,9 @@ import com.practicum.myhabitreminder.domain.models.Habit
 import com.practicum.myhabitreminder.presentation.viewmodels.HabitViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -28,9 +30,6 @@ import java.util.Calendar
 
 class CreateHabitFragment : Fragment(),
     DatePickerDialog.OnDateSetListener {
-
-    private var mSelectedCategory: String = "animal"
-    var jokeResponse: JokeResponse? = null
 
     private var _binding: FragmentCreateHabitBinding? = null
     private val binding get() = _binding!!
@@ -51,22 +50,13 @@ class CreateHabitFragment : Fragment(),
         getJoke()
     }
 
-    val retrofit = Retrofit.Builder()
-        .baseUrl("https://official-joke-api.appspot.com/")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-        .create(JokesApi::class.java)
-
     fun getJoke() {
         binding.textView.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
-                val api = retrofit
-                val model = api.getRandomJoke()
-                binding.textView.text = "${model?.setup}\n${model?.punchline}"
+                binding.textView.text = "${viewModel.getJoke().setup} \n ${viewModel.getJoke().punchline}"
             }
         }
     }
-
 
     private fun initListeners() {
         binding.btnPickDate.setOnClickListener {
