@@ -1,6 +1,7 @@
 package com.practicum.myhabitreminder
 
 import android.app.Application
+import com.practicum.myhabitreminder.common.di.ApiModule
 import com.practicum.myhabitreminder.common.di.authModule
 import com.practicum.myhabitreminder.common.di.dbModule
 import com.practicum.myhabitreminder.common.di.habitModule
@@ -21,7 +22,8 @@ class App : Application() {
                 listOf(
                     dbModule,
                     habitModule,
-                    authModule
+                    authModule,
+                    ApiModule
                 )
             )
         }

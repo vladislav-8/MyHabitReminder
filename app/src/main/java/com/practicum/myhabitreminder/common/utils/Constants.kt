@@ -8,3 +8,9 @@ const val ALARM_SET_TIME_ID = "background_time"
 
 //bundle
 const val EXTRA_KEY = "HABIT_KEY"
+
+//server code responses
+const val STATUS_CODE_SUCCESS = 200
+const val STATUS_CODE_SERVER_ERROR = 500
+const val STATUS_CODE_BAD_REQUEST = 400
+const val STATUS_CODE_NO_NETWORK_CONNECTION = -1
